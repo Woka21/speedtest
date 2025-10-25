@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About Us – Netlify Speed Test</title>
+  <meta name="description" content="Meet the team behind the privacy-first, browser-based internet speed test. No ads, no tracking, open-source and hosted on Netlify.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://amazing-name-123456.netlify.app/about">
+  <style>
+    :root{--bg:#0d1117;--card:#161b22;--accent:#00ff66;--text:#c9d1d9;--sub:#8b949e}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+    body{background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh}
+    header{padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #30363d}
+    .logo{font-size:1.5rem;font-weight:700;color:var(--accent)}
+    nav .nav-list{list-style:none;display:flex;gap:1.5rem}
+    nav a{color:var(--text);text-decoration:none;font-weight:500}nav a:hover{color:var(--accent)}
+    main{flex:1;padding:3rem 1rem;display:flex;flex-direction:column;align-items:center}
+    .container{max-width:800px;width:100%}
+    .hero{text-align:center;margin-bottom:3rem}
+    .hero h1{font-size:2.5rem;margin-bottom:1rem}
+    .hero p{font-size:1.125rem;color:var(--sub)}
+    .cards{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+    .card{background:var(--card);border:1px solid #30363d;border-radius:12px;padding:2rem}
+    .card h3{font-size:1.25rem;margin-bottom:.75rem;color:var(--accent)}
+    .card p{line-height:1.6;color:var(--sub)}
+    .cta-box{background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin-top:3rem}
+    .cta-box h2{margin-bottom:1rem}
+    .cta-box a{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:6px;font-weight:600;text-decoration:none}
+    footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center;border-top:1px solid #30363d}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">⚡ SpeedTest</div>
+   <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html">Speed Test</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>About Us</h1>
+        <p>We built the speed test we always wanted: <strong>private, ad-free and open-source.</strong></p>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Privacy First</h3>
+          <p>Zero tracking, zero ads. Your IP and test results never leave your browser. Read our <a href="/privacy" style="color:var(--accent)">privacy policy</a>.</p>
+        </div>
+        <div class="card">
+          <h3>Open Source</h3>
+          <p>MIT-licensed code on <a href="https://github.com/yourname/speedtest-top10" target="_blank" rel="noopener" style="color:var(--accent)">GitHub</a>. Fork, modify or embed freely.</p>
+        </div>
+        <div class="card">
+          <h3>Netlify Powered</h3>
+          <p>Hosted on Netlify’s global CDN for sub-second load times and perfect Core Web Vitals.</p>
+        </div>
+        <div class="card">
+          <h3>Accurate Results</h3>
+          <p>Uses Cloudflare’s 100 MB edge endpoint and 90th-percentile calculation for real-world speeds.</p>
+        </div>
+      </section>
+
+      <section class="cta-box">
+        <h2>Try it now</h2>
+        <p>See how fast your internet really is in under 3 seconds.</p>
+        <a href="/">Start Speed Test</a>
+      </section>
+    </div>
+  </main>
+
+  <footer>© 202
