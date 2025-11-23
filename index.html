@@ -30,18 +30,38 @@
     footer a{color:var(--sub);text-decoration:none;margin:0 .5rem}
     @media(max-width:600px){h1{font-size:1.4rem}.gauge{width:180px;height:180px}.gauge-text .value{font-size:2.5rem}}
   </style>
+
+  <!-- invisible structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["WebSite","QAPage"],
+    "name": "Internet Speed Test",
+    "url": "https://testinternetspeed.netlify.app/",
+    "description": "Free browser-based internet speed test that reports download, upload, ping, IP address and ISP in under 30 seconds.",
+    "mainEntity": {
+      "@type": "Question",
+      "name": "How fast is my internet connection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Click GO to measure real-time download speed, upload speed, ping latency, your public IP and ISP name."
+      }
+    }
+  }
+  </script>
 </head>
+
 <body>
   <header>
     <div class="logo">⚡ SpeedTest</div>
-   <nav aria-label="Main">
-  <ul class="nav-list">
-    <li><a href="index.html">Speed Test</a></li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="learn.html">Learn More</a></li>
-    <li><a href="faq.html">FAQ</a></li>
-  </ul>
-</nav>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html">Speed Test</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="learn.html">Learn More</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
@@ -61,6 +81,17 @@
       </div>
 
       <button class="go" id="goBtn" aria-label="Start speed test">GO</button>
+
+      <!-- NEW technical results block -->
+      <section id="tech-results" style="margin-top:2rem;font-family:monospace;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem;text-align:left;color:var(--sub);">
+        <h2 style="color:var(--accent);font-size:1.1rem;margin-bottom:.75rem;">Detailed Results</h2>
+        <p><strong>Download:</strong>  <span id="down">--</span> Mbps</p>
+        <p><strong>Upload:</strong>    <span id="up">--</span> Mbps</p>
+        <p><strong>Ping:</strong>      <span id="ping">--</span> ms</p>
+        <p><strong>IP Address:</strong> <span id="ip">--</span></p>
+        <p><strong>ISP / Carrier:</strong> <span id="isp">--</span></p>
+        <small style="display:block;margin-top:.5rem;">Values update automatically when the test ends.</small>
+      </section>
     </div>
   </main>
 
@@ -71,36 +102,67 @@
   </footer>
 
   <script>
-    const goBtn = document.getElementById('goBtn');
+    const goBtn   = document.getElementById('goBtn');
     const valueEl = document.querySelector('.gauge-text .value');
-    const fillEl = document.querySelector('.gauge-fill');
-    const CF_URL = 'https://speed.cloudflare.com/__down?bytes=100000000';
+    const fillEl  = document.querySelector('.gauge-fill');
+    const downEl  = document.getElementById('down');
+    const upEl    = document.getElementById('up');
+    const pingEl  = document.getElementById('ping');
+    const ipEl    = document.getElementById('ip');
+    const ispEl   = document.getElementById('isp');
+    const CF_DOWN = 'https://speed.cloudflare.com/__down?bytes=100000000';
+    const CF_UP   = 'https://speed.cloudflare.com/__up';
+    const CF_LAT  = 'https://speed.cloudflare.com/__latency';
+
     const circumference = 2 * Math.PI * 95;
 
-    goBtn.addEventListener('click', async () => {
+    async function runTest() {
       goBtn.disabled = true;
       valueEl.textContent = '0';
       fillEl.style.strokeDasharray = `0 ${circumference}`;
       const start = performance.now();
-      const resp = await fetch(CF_URL);
-      const reader = resp.body.getReader();
+
+      // ----- download sample -----
+      const dlResp = await fetch(CF_DOWN);
+      const reader = dlResp.body.getReader();
       let bytes = 0;
-      const timer = setInterval(() => {
-        if ((performance.now() - start) > 3000) { reader.cancel(); clearInterval(timer); }
-      }, 100);
+      const timer = setInterval(() => { if ((performance.now() - start) > 3000) { reader.cancel(); clearInterval(timer); } }, 100);
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         bytes += value.length;
       }
       clearInterval(timer);
-      const sec = (performance.now() - start) / 1000;
-      const mbps = (bytes * 8) / (sec * 1e6);
-      const pct = Math.min(mbps / 200, 1);
+      const sec   = (performance.now() - start) / 1000;
+      const downMbps = (bytes * 8) / (sec * 1e6);
+
+      // ----- upload sample (10 MB) -----
+      const uplData = new Blob([new Uint8Array(10 * 1024 * 1024)]);
+      const upStart = performance.now();
+      await fetch(CF_UP, { method: 'POST', body: uplData });
+      const upSec   = (performance.now() - upStart) / 1000;
+      const upMbps  = (80) / upSec;  // 80 Mbit
+
+      // ----- latency (ping) -----
+      const lat0 = performance.now();
+      await fetch(CF_LAT);
+      const pingMs = (performance.now() - lat0);
+
+      // ----- IP + ISP -----
+      const ipInfo = await (await fetch('https://ipapi.co/json/')).json();
+      ipEl.textContent  = ipInfo.ip;
+      ispEl.textContent = ipInfo.org || 'Unknown';
+
+      // ----- update UI -----
+      const pct = Math.min(downMbps / 200, 1);
       fillEl.style.strokeDasharray = `${pct * circumference} ${circumference}`;
-      valueEl.textContent = mbps.toFixed(1);
+      valueEl.textContent = downMbps.toFixed(1);
+      downEl.textContent = downMbps.toFixed(1);
+      upEl.textContent   = upMbps.toFixed(1);
+      pingEl.textContent = pingMs.toFixed(0);
       goBtn.disabled = false;
-    });
+    }
+    goBtn.addEventListener('click', runTest);
   </script>
 </body>
 </html>
