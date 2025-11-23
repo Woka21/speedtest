@@ -15,20 +15,19 @@
     .logo{font-size:1.5rem;font-weight:700;color:var(--accent)}
     nav .nav-list{list-style:none;display:flex;gap:1.5rem}
     nav a{color:var(--text);text-decoration:none;font-weight:500}nav a:hover{color:var(--accent)}
-    main{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem}
-    .gauge-card{background:var(--card);border:1px solid #30363d;border-radius:16px;padding:2rem 3rem;text-align:center;max-width:420px;width:90%}
-    h1{font-size:1.75rem;margin-bottom:.5rem}
-    p.sub{color:var(--sub);margin-bottom:2rem}
-    .gauge{width:220px;height:220px;margin:0 auto 2rem;position:relative}
-    .gauge-bg{stroke:#30363d;stroke-width:18;fill:none}
-    .gauge-fill{stroke:var(--accent);stroke-width:18;stroke-linecap:round;fill:none;transform:rotate(-90deg);transform-origin:center;transition:stroke-dasharray .3s}
-    .gauge-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-    .gauge-text .value{font-size:3rem;font-weight:700}
-    .gauge-text .unit{font-size:1rem;color:var(--sub)}
-    button.go{width:100%;padding:1rem;font-size:1.25rem;border:0;border-radius:8px;background:var(--accent);color:var(--bg);cursor:pointer;transition:opacity .2s}button.go:disabled{opacity:.6;cursor:not-allowed}
+    main{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;width:100%}
+    .card{background:var(--card);border:1px solid #30363d;border-radius:12px;padding:2.5rem 3rem;text-align:center;max-width:460px;width:90%}
+    h1{font-size:2rem;margin-bottom:.5rem;letter-spacing:-.5px}
+    p.sub{color:var(--sub);margin-bottom:2rem;font-size:1rem}
+    .speed{font-size:4rem;font-weight:700;color:var(--accent);line-height:1}
+    .unit{font-size:1.25rem;color:var(--sub);margin-left:.25rem}
+    .meta{margin-top:1rem;font-size:.9rem;color:var(--sub)}
+    button.go{width:100%;padding:.9rem;font-size:1.1rem;border:0;border-radius:6px;background:var(--accent);color:var(--bg);cursor:pointer;transition:opacity .2s}button.go:disabled{opacity:.6;cursor:not-allowed}
+    .res{margin-top:1.5rem;text-align:left;font-size:.9rem;color:var(--sub)}
+    .res p{margin:.25rem 0}
     footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center}
     footer a{color:var(--sub);text-decoration:none;margin:0 .5rem}
-    @media(max-width:600px){h1{font-size:1.4rem}.gauge{width:180px;height:180px}.gauge-text .value{font-size:2.5rem}}
+    @media(max-width:600px){h1{font-size:1.6rem}.speed{font-size:3rem}}
   </style>
 
   <!-- invisible structured data -->
@@ -65,31 +64,22 @@
   </header>
 
   <main>
-    <div class="gauge-card">
+    <div class="card">
       <h1>Internet Speed Test</h1>
       <p class="sub">Click GO to measure your download speed in seconds</p>
 
-      <div class="gauge">
-        <svg width="220" height="220">
-          <circle class="gauge-bg" cx="110" cy="110" r="95"></circle>
-          <circle class="gauge-fill" cx="110" cy="110" r="95" stroke-dasharray="0 596.9"></circle>
-        </svg>
-        <div class="gauge-text">
-          <div class="value">--</div>
-          <div class="unit">Mbps</div>
-        </div>
+      <div class="speed" id="speed">--<span class="unit">Mbps</span></div>
+      <p class="meta" id="meta">Ready to start</p>
+
+      <button class="go" id="goBtn">GO</button>
+
+      <!-- lightweight results + extra copy -->
+      <div class="res" id="res" style="display:none;">
+        <p><strong>Download:</strong> <span id="down">--</span> Mbps</p>
+        <p><strong>Ping:</strong> <span id="ping">--</span> ms</p>
+        <p><strong>IP / ISP:</strong> <span id="ipisp">--</span></p>
+        <p style="margin-top:.5rem;font-size:.85rem;">The test downloads a 10 MB sample from the nearest Cloudflare edge, measures time, and converts it to speed. Ping is the round-trip delay to that server. Your public IP and carrier name are shown so you can verify routing.</p>
       </div>
-
-      <button class="go" id="goBtn" aria-label="Start speed test">GO</button>
-
-      <!-- NEW lightweight results + explanation -->
-      <section id="tech-results" style="margin-top:2rem;font-size:.9rem;color:var(--sub);text-align:left;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem;">
-        <h2 style="color:var(--accent);font-size:1rem;margin-bottom:.5rem;">What you get</h2>
-        <p><strong>Download:</strong> <span id="down">--</span> Mbps<br>
-           <strong>Ping:</strong> <span id="ping">--</span> ms<br>
-           <strong>IP / ISP:</strong> <span id="ipisp">--</span></p>
-        <p style="margin-top:.5rem;">The test downloads a 10 MB sample from the nearest Cloudflare edge, measures time, and converts it to speed. Ping is the round-trip delay to that server. Your public IP and carrier name are shown so you can verify routing.</p>
-      </section>
     </div>
   </main>
 
@@ -101,21 +91,22 @@
 
   <script>
     const goBtn   = document.getElementById('goBtn');
-    const valueEl = document.querySelector('.gauge-text .value');
-    const fillEl  = document.querySelector('.gauge-fill');
+    const speedEl = document.getElementById('speed');
+    const metaEl  = document.getElementById('meta');
+    const resEl   = document.getElementById('res');
     const downEl  = document.getElementById('down');
     const pingEl  = document.getElementById('ping');
     const ipispEl = document.getElementById('ipisp');
-    const circumference = 2 * Math.PI * 95;
 
     async function runTest() {
       goBtn.disabled = true;
-      valueEl.textContent = '0';
-      fillEl.style.strokeDasharray = `0 ${circumference}`;
+      metaEl.textContent = 'Testing…';
+      resEl.style.display = 'none';
+      speedEl.innerHTML = '--<span class="unit">Mbps</span>';
+
       const start = performance.now();
-      // 10 MB download slice
-      const resp = await fetch('https://speed.cloudflare.com/__down?bytes=10000000');
-      const reader = resp.body.getReader();
+      const resp  = await fetch('https://speed.cloudflare.com/__down?bytes=10000000');
+      const reader= resp.body.getReader();
       let bytes = 0;
       while (true) {
         const { done, value } = await reader.read();
@@ -123,23 +114,23 @@
         bytes += value.length;
       }
       const sec   = (performance.now() - start) / 1000;
-      const downMbps = (bytes * 8) / (sec * 1e6);
+      const mbps  = (bytes * 8) / (sec * 1e6);
 
       // latency ping
-      const t0 = performance.now();
+      const t0    = performance.now();
       await fetch('https://speed.cloudflare.com/__latency');
-      const pingMs = (performance.now() - t0);
+      const ping  = (performance.now() - t0);
 
       // IP + ISP
       const ipInfo = await (await fetch('https://ipapi.co/json/')).json();
       ipispEl.textContent = `${ipInfo.ip}  ${ipInfo.org || 'Unknown'}`;
 
-      // UI update
-      const pct = Math.min(downMbps / 200, 1);
-      fillEl.style.strokeDasharray = `${pct * circumference} ${circumference}`;
-      valueEl.textContent = downMbps.toFixed(1);
-      downEl.textContent = downMbps.toFixed(1);
-      pingEl.textContent = pingMs.toFixed(0);
+      // UI
+      speedEl.innerHTML = `${mbps.toFixed(1)}<span class="unit">Mbps</span>`;
+      metaEl.textContent  = 'Done';
+      downEl.textContent  = mbps.toFixed(1);
+      pingEl.textContent  = ping.toFixed(0);
+      resEl.style.display = 'block';
       goBtn.disabled = false;
     }
     goBtn.addEventListener('click', runTest);
