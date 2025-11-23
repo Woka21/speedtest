@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>FAQ – Internet Speed Test Questions Answered | Netlify Speed Test</title>
+  <title>FAQ – Internet Speed Test Questions Answered | SpeedTest</title>
   <meta name="description" content="30+ answered questions: accuracy, privacy, browser support, Wi-Fi vs cable, upload test, embed, troubleshooting and more.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://testinternetspeed.netlify.app/faq">
@@ -23,16 +23,27 @@
     .faq-item summary::after{content:'+';font-size:1.2rem;color:var(--accent)}
     .faq-item[open] summary::after{content:'–'}
     .faq-item .content{padding:0 1.5rem 1.5rem;color:var(--sub);line-height:1.7}
-    .faq-item .content a{color:var(--accent)}
     .cta-box{background:var(--card);border:1px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin-top:3rem}
     .cta-box a{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:6px;font-weight:600;text-decoration:none}
     footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center;border-top:1px solid var(--border)}
   </style>
+
+  <!-- invisible structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "name": "SpeedTest FAQ",
+    "url": "https://testinternetspeed.netlify.app/faq",
+    "description": "Frequently asked questions about the privacy-first SpeedTest – accuracy, privacy, browser support, Wi-Fi vs cable, upload test, embed, troubleshooting."
+  }
+  </script>
 </head>
+
 <body>
   <header>
     <div class="logo">⚡ SpeedTest</div>
-   <nav aria-label="Main">
+    <nav aria-label="Main">
       <ul class="nav-list">
         <li><a href="index.html">Speed Test</a></li>
         <li><a href="about.html">About Us</a></li>
@@ -46,19 +57,19 @@
     <div class="container">
       <section class="hero">
         <h1>FAQ – Internet Speed Test</h1>
-        <p>30+ questions answered. Accuracy, privacy, Wi-Fi, upload, embed, troubleshooting and more.</p>
+        <p>30+ questions answered. Accuracy, privacy, browser support, Wi-Fi vs cable, upload test, embed, troubleshooting and more.</p>
       </section>
 
       <div class="faq-list">
         <!-- 1 -->
         <details class="faq-item">
           <summary>Is the test accurate?</summary>
-          <div class="content"><p>±5 %. We download 100 MB from Cloudflare edge, discard TCP slow-start and report the 90th-percentile speed – the rate you can actually sustain.</p></div>
+          <div class="content"><p>±5 %. We download 10 MB from Cloudflare edge, discard TCP slow-start and report the 90th-percentile speed – the rate you can actually sustain.</p></div>
         </details>
         <!-- 2 -->
         <details class="faq-item">
           <summary>Do you store my IP or results?</summary>
-          <div class="content"><p>No. Everything happens in your browser; no data hits our servers. </div>
+          <div class="content"><p>No. Everything happens in your browser; no data leaves your device.</p></div>
         </details>
         <!-- 3 -->
         <details class="faq-item">
@@ -68,7 +79,7 @@
         <!-- 4 -->
         <details class="faq-item">
           <summary>Why is my speed lower than advertised?</summary>
-          <div class="content"><p>ISP ads show “up to” speeds. Real factors: Wi-Fi signal, device limits, network congestion, background apps, server peering. Test on cable for the closest figure.</p></div>
+          <div class="content"><p>ISP ads show “up to” speeds. Real factors: Wi-Fi signal, device limits, network congestion, background apps, server peering. Test on cable for the closest figure to your ISP plan.</p></div>
         </details>
         <!-- 5 -->
         <details class="faq-item">
@@ -95,7 +106,7 @@
         <!-- 8 -->
         <details class="faq-item">
           <summary>Does the test measure upload speed?</summary>
-          <div class="content"><p>Currently download only. Upload test is planned – we’ll POST the same 100 MB back to Cloudflare’s <code>__up</code> endpoint.</p></div>
+          <div class="content"><p>Currently download only. Upload test is planned – we’ll POST the same 10 MB back to Cloudflare’s <code>__up</code> endpoint.</p></div>
         </details>
         <!-- 9 -->
         <details class="faq-item">
@@ -105,7 +116,7 @@
         <!-- 10 -->
         <details class="faq-item">
           <summary>Can I embed the test on my site?</summary>
-          <div class="content"><p>Yes! MIT-licensed. Link or iframe welcome. Repo: <a href="https://github.com/yourname/speedtest-top10" target="_blank" rel="noopener">GitHub</a></p></div>
+          <div class="content"><p>Yes! MIT-licensed. Link or iframe welcome. No attribution required, but appreciated.</p></div>
         </details>
         <!-- 11-30 (shortened for paste-size, but included in full) -->
         <!-- 11 -->
@@ -117,25 +128,25 @@
         <!-- 14 -->
         <details class="faq-item"><summary>How often should I test?</summary><div class="content"><p>Once after setup, then weekly or whenever you feel slowdowns. Keep a log to show your ISP if needed.</p></div></details>
         <!-- 15 -->
-        <details class="faq-item"><summary>Can I run the test on my phone?</summary><div class="content"><p>Yes – use Wi-Fi for mobile broadband or disable mobile data to test home Wi-Fi. Works in any modern mobile browser.</p></div></details>
+        <details class="faq-item"><summary>Can I run the test on my phone?</summary><div class="content"><p>Yes – use Wi-Fi for home broadband or disable mobile data to test home Wi-Fi. Works in any modern mobile browser.</p></div></details>
         <!-- 16 -->
         <details class="faq-item"><summary>What ports does the test use?</summary><div class="content"><p>HTTPS 443 (HTTP/3 if available). No exotic ports – passes every firewall.</p></div></details>
         <!-- 17 -->
         <details class="faq-item"><summary>Does ad-blocker affect the test?</summary><div class="content"><p>No – we don’t serve ads or tracking scripts; ad-blockers have nothing to block.</p></div></details>
         <!-- 18 -->
-        <details class="faq-item"><summary>Why is my upload speed missing?</summary><div class="content"><p>Upload test is under construction. For now use Cloudflare’s <a href="https://speed.cloudflare.com" target="_blank" rel="noopener">full suite</a> or <a href="https://fast.com" target="_blank" rel="noopener">Fast.com</a>.</p></div></details>
+        <details class="faq-item"><summary>Why is my upload speed missing?</summary><div class="content"><p>Upload test is under construction. For now use Cloudflare’s full suite or Fast.com.</p></div></details>
         <!-- 19 -->
-        <details class="faq-item"><summary>Can I download my results?</summary><div class="content"><p>Not yet. We’ll add a “Copy JSON” button soon – stay tuned on <a href="https://github.com/yourname/speedtest-top10" target="_blank" rel="noopener">GitHub</a>.</p></div></details>
+        <details class="faq-item"><summary>Can I download my results?</summary><div class="content"><p>Not yet. We’ll add a “Copy JSON” button soon – stay tuned.</p></div></details>
         <!-- 20 -->
         <details class="faq-item"><summary>Does the test work offline?</summary><div class="content"><p>No – you need an internet connection to reach Cloudflare edge.</p></div></details>
         <!-- 21 -->
-        <details class="faq-item"><summary>Is the code open source?</summary><div class="content"><p>Yes – MIT license. Fork, modify, embed freely. Repo link in footer.</p></div></details>
+        <details class="faq-item"><summary>Is the code open source?</summary><div class="content"><p>Yes – MIT license. Fork, modify, embed freely.</p></div></details>
         <!-- 22 -->
-        <details class="faq-item"><summary>How can I contact you?</summary><div class="content"><p>Open an issue on GitHub or email via the address listed in the repo.</p></div></details>
+        <details class="faq-item"><summary>How can I contact you?</summary><div class="content"><p>Open an issue in the repository or email via the address listed there.</p></div></details>
         <!-- 23 -->
         <details class="faq-item"><summary>Does the test use cookies?</summary><div class="content"><p>No cookies, no localStorage, no fingerprinting.</p></div></details>
         <!-- 24 -->
-        <details class="faq-item"><summary>Can I run the test inside an iframe?</summary><div class="content"><p>Yes – no <code>X-Frame-Options</code> header is set. Attribution appreciated.</p></div></details>
+        <details class="faq-item"><summary>Can I run the test inside an iframe?</summary><div class="content"><p>Yes – no X-Frame-Options header is set. Attribution appreciated.</p></div></details>
         <!-- 25 -->
         <details class="faq-item"><summary>What is the maximum speed the test can measure?</summary><div class="content"><p>Theoretical limit is ~15 Gbps per stream (browser + Cloudflare). For higher, open multiple tabs or use the desktop app.</p></div></details>
         <!-- 26 -->
@@ -143,12 +154,20 @@
         <!-- 27 -->
         <details class="faq-item"><summary>Does IPv6 work?</summary><div class="content"><p>Yes – Cloudflare supports IPv6. Your device picks the best stack automatically.</p></div></details>
         <!-- 28 -->
-        <details class="faq-item"><summary>Can I run the test on a smart TV?</summary><div class="content"><p>If the TV browser supports fetch and readableStream, yes. Otherwise cast from phone.</p></div></details>
+        <details class="faq-item"><summary>Can I run the test on a smart TV?</summary><div class="content"><p>If the TV browser supports fetch and ReadableStream, yes. Otherwise cast from phone.</p></div></details>
         <!-- 29 -->
         <details class="faq-item"><summary>Will you add jitter and packet-loss?</summary><div class="content"><p>Yes – WebRTC stats are planned for a future release (no ETA yet).</p></div></details>
         <!-- 30 -->
-        <details class="faq-item"><summary>How do I report a bug?</summary><div class="content"><p>Open an issue on <a href="https://github.com/yourname/speedtest-top10" target="_blank" rel="noopener">GitHub</a> with browser version, OS and screenshot.</p></div></details>
+        <details class="faq-item"><summary>How do I report a bug?</summary><div class="content"><p>Open an issue in the repository with browser version, OS and screenshot.</p></div></details>
       </div>
+
+      <!-- NEW extra copy block -->
+      <section class="card" style="margin-top:2rem;">
+        <h3>Still stuck?</h3>
+        <p style="color:var(--sub);line-height:1.7;">
+          If none of the above answers solve your issue, run the test three times on cable, note the exact numbers, then email your ISP with the screenshots. Include time-stamp, device model and firmware version – their tier-2 team will thank you.
+        </p>
+      </section>
 
       <section class="cta-box">
         <h2>All clear? Test your speed now</h2>
@@ -157,6 +176,6 @@
     </div>
   </main>
 
-  <footer>© 2025 Netlify Speed Test</footer>
+  <footer>© 2025 SpeedTest</footer>
 </body>
 </html>
