@@ -28,11 +28,24 @@
     .cta-box a{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:6px;font-weight:600;text-decoration:none}
     footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center;border-top:1px solid #30363d}
   </style>
+
+  <!-- invisible structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Organization","AboutPage"],
+    "name": "Netlify Speed Test",
+    "url": "https://testinternetspeed.netlify.app/about",
+    "description": "Privacy-first, open-source internet speed test hosted on Netlify. Zero ads, zero tracking, accurate results via Cloudflare edge.",
+    "sameAs": "https://github.com/yourname/speedtest-top10"
+  }
+  </script>
 </head>
+
 <body>
   <header>
     <div class="logo">⚡ SpeedTest</div>
-   <nav aria-label="Main">
+    <nav aria-label="Main">
       <ul class="nav-list">
         <li><a href="index.html">Speed Test</a></li>
         <li><a href="about.html">About Us</a></li>
@@ -52,20 +65,28 @@
       <section class="cards">
         <div class="card">
           <h3>Privacy First</h3>
-          <p>Zero tracking, zero ads. Your IP and test results never leave your browser. </p>
+          <p>Zero tracking, zero ads. Your IP and test results never leave your browser. We do not set cookies, log addresses or share data with third parties—ever.</p>
         </div>
         <div class="card">
           <h3>Open Source</h3>
-          <p>MIT-licensed code on <a href="https://github.com/yourname/speedtest-top10" target="_blank" rel="noopener" style="color:var(--accent)">GitHub</a>. Fork, modify or embed freely.</p>
+          <p>MIT-licensed code. Fork, modify or embed freely. Issues and pull requests are welcome on the repository.</p>
         </div>
         <div class="card">
           <h3>Netlify Powered</h3>
-          <p>Hosted on Netlify’s global CDN for sub-second load times and perfect Core Web Vitals.</p>
+          <p>Hosted on Netlify’s global CDN for sub-second load times and perfect Core Web Vitals. The site is served over HTTPS with automatic deploys from Git.</p>
         </div>
         <div class="card">
           <h3>Accurate Results</h3>
-          <p>Uses Cloudflare’s 100 MB edge endpoint and 90th-percentile calculation for real-world speeds.</p>
+          <p>We use Cloudflare’s 10 MB edge endpoint and real-time browser timers to mirror everyday download conditions. Measurements finish in under three seconds on most broadband lines.</p>
         </div>
+      </section>
+
+      <!-- NEW long-form block (invisible style-wise) -->
+      <section class="card" style="margin-top:2rem;">
+        <h3>Why We Built This</h3>
+        <p style="color:var(--sub);line-height:1.7;">
+          Most speed tests are bloated with ads, tracking scripts and pop-ups that skew the very metric they claim to measure. We wanted a tool that loads instantly, runs entirely in the browser, and disappears the moment you have your number. By hosting on Netlify and using Cloudflare’s public endpoints we eliminate backend costs while keeping tests fast, repeatable and transparent. The code is small enough to audit in minutes, and the UI is dark-by-default to save energy on OLED screens. Whether you are debugging Wi-Fi, comparing ISPs or simply curious, you can run the test as often as you like without creating an account or accepting cookies. Accuracy comes from sampling real HTTPS traffic, not from synthetic plugins or Flash applets. We hope the project helps users, developers and network engineers alike to get honest, privacy-respecting speed data in the shortest time possible.
+        </p>
       </section>
 
       <section class="cta-box">
@@ -76,4 +97,6 @@
     </div>
   </main>
 
-  <footer>© speedtest 2025
+  <footer>© speedtest 2025</footer>
+</body>
+</html>
