@@ -38,13 +38,13 @@
     "@type": ["WebSite","QAPage"],
     "name": "Internet Speed Test",
     "url": "https://testinternetspeed.netlify.app/",
-    "description": "Free browser-based internet speed test that reports download, upload, ping, IP address and ISP in under 30 seconds.",
+    "description": "Free browser-based internet speed test that reports download speed, ping, your public IP address and ISP in under 30 seconds.",
     "mainEntity": {
       "@type": "Question",
       "name": "How fast is my internet connection?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Click GO to measure real-time download speed, upload speed, ping latency, your public IP and ISP name."
+        "text": "Click GO to measure real-time download speed, ping latency, your public IP and ISP name."
       }
     }
   }
@@ -82,15 +82,13 @@
 
       <button class="go" id="goBtn" aria-label="Start speed test">GO</button>
 
-      <!-- NEW technical results block -->
-      <section id="tech-results" style="margin-top:2rem;font-family:monospace;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem;text-align:left;color:var(--sub);">
-        <h2 style="color:var(--accent);font-size:1.1rem;margin-bottom:.75rem;">Detailed Results</h2>
-        <p><strong>Download:</strong>  <span id="down">--</span> Mbps</p>
-        <p><strong>Upload:</strong>    <span id="up">--</span> Mbps</p>
-        <p><strong>Ping:</strong>      <span id="ping">--</span> ms</p>
-        <p><strong>IP Address:</strong> <span id="ip">--</span></p>
-        <p><strong>ISP / Carrier:</strong> <span id="isp">--</span></p>
-        <small style="display:block;margin-top:.5rem;">Values update automatically when the test ends.</small>
+      <!-- NEW lightweight results + explanation -->
+      <section id="tech-results" style="margin-top:2rem;font-size:.9rem;color:var(--sub);text-align:left;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem;">
+        <h2 style="color:var(--accent);font-size:1rem;margin-bottom:.5rem;">What you get</h2>
+        <p><strong>Download:</strong> <span id="down">--</span> Mbps<br>
+           <strong>Ping:</strong> <span id="ping">--</span> ms<br>
+           <strong>IP / ISP:</strong> <span id="ipisp">--</span></p>
+        <p style="margin-top:.5rem;">The test downloads a 10 MB sample from the nearest Cloudflare edge, measures time, and converts it to speed. Ping is the round-trip delay to that server. Your public IP and carrier name are shown so you can verify routing.</p>
       </section>
     </div>
   </main>
@@ -106,14 +104,8 @@
     const valueEl = document.querySelector('.gauge-text .value');
     const fillEl  = document.querySelector('.gauge-fill');
     const downEl  = document.getElementById('down');
-    const upEl    = document.getElementById('up');
     const pingEl  = document.getElementById('ping');
-    const ipEl    = document.getElementById('ip');
-    const ispEl   = document.getElementById('isp');
-    const CF_DOWN = 'https://speed.cloudflare.com/__down?bytes=100000000';
-    const CF_UP   = 'https://speed.cloudflare.com/__up';
-    const CF_LAT  = 'https://speed.cloudflare.com/__latency';
-
+    const ipispEl = document.getElementById('ipisp');
     const circumference = 2 * Math.PI * 95;
 
     async function runTest() {
@@ -121,44 +113,32 @@
       valueEl.textContent = '0';
       fillEl.style.strokeDasharray = `0 ${circumference}`;
       const start = performance.now();
-
-      // ----- download sample -----
-      const dlResp = await fetch(CF_DOWN);
-      const reader = dlResp.body.getReader();
+      // 10 MB download slice
+      const resp = await fetch('https://speed.cloudflare.com/__down?bytes=10000000');
+      const reader = resp.body.getReader();
       let bytes = 0;
-      const timer = setInterval(() => { if ((performance.now() - start) > 3000) { reader.cancel(); clearInterval(timer); } }, 100);
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         bytes += value.length;
       }
-      clearInterval(timer);
       const sec   = (performance.now() - start) / 1000;
       const downMbps = (bytes * 8) / (sec * 1e6);
 
-      // ----- upload sample (10 MB) -----
-      const uplData = new Blob([new Uint8Array(10 * 1024 * 1024)]);
-      const upStart = performance.now();
-      await fetch(CF_UP, { method: 'POST', body: uplData });
-      const upSec   = (performance.now() - upStart) / 1000;
-      const upMbps  = (80) / upSec;  // 80 Mbit
+      // latency ping
+      const t0 = performance.now();
+      await fetch('https://speed.cloudflare.com/__latency');
+      const pingMs = (performance.now() - t0);
 
-      // ----- latency (ping) -----
-      const lat0 = performance.now();
-      await fetch(CF_LAT);
-      const pingMs = (performance.now() - lat0);
-
-      // ----- IP + ISP -----
+      // IP + ISP
       const ipInfo = await (await fetch('https://ipapi.co/json/')).json();
-      ipEl.textContent  = ipInfo.ip;
-      ispEl.textContent = ipInfo.org || 'Unknown';
+      ipispEl.textContent = `${ipInfo.ip}  ${ipInfo.org || 'Unknown'}`;
 
-      // ----- update UI -----
+      // UI update
       const pct = Math.min(downMbps / 200, 1);
       fillEl.style.strokeDasharray = `${pct * circumference} ${circumference}`;
       valueEl.textContent = downMbps.toFixed(1);
       downEl.textContent = downMbps.toFixed(1);
-      upEl.textContent   = upMbps.toFixed(1);
       pingEl.textContent = pingMs.toFixed(0);
       goBtn.disabled = false;
     }
