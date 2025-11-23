@@ -36,10 +36,11 @@
     footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center;border-top:1px solid var(--border)}
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">⚡ SpeedTest</div>
-  <nav aria-label="Main">
+    <nav aria-label="Main">
       <ul class="nav-list">
         <li><a href="index.html">Speed Test</a></li>
         <li><a href="about.html">About Us</a></li>
@@ -65,22 +66,27 @@
           <li><a href="#wifi-vs-ethernet">Wi-Fi vs Ethernet</a></li>
           <li><a href="#isp-plans">ISP plans & advertised speeds</a></li>
           <li><a href="#improve">How to improve your speed</a></li>
-          <li><a="#troubleshoot">Troubleshooting flow</a></li>
+          <li><a href="#troubleshoot">Troubleshooting flow</a></li>
         </ul>
       </nav>
 
       <section id="how-it-works">
         <h2>How the test works</h2>
-        <p>Our browser-based speed test downloads 100 MB of random, incompressible data from a Cloudflare edge server. We time every chunk and report the <strong>90th-percentile speed</strong> – the rate you can actually sustain, not a short burst.</p>
+        <p>Our browser-based speed test downloads 10 MB of random, incompressible data from a Cloudflare edge server. We time every chunk and report the <strong>90th-percentile speed</strong> – the rate you can actually sustain, not a short burst.</p>
         <div class="card">
           <h3>Step-by-step process</h3>
           <ol>
-            <li>Your browser requests <code>__down?bytes=100000000</code> (100 MB).</li>
+            <li>Your browser requests <code>__down?bytes=10000000</code> (10 MB).</li>
             <li>Server streams data over HTTPS (HTTP/3 if available).</li>
             <li>Client measures bytes per millisecond.</li>
             <li>We discard the slowest 10 % (TCP slow-start) and average the rest.</li>
             <li>Result shown in Mbps and on the live gauge.</li>
           </ol>
+        </div>
+        <!-- NEW extra copy block -->
+        <div class="card">
+          <h3>Why 10 MB and not 1 MB?</h3>
+          <p>A 1 MB sample finishes too quickly on fibre lines and gives inflated bursts. Ten megabytes is large enough to survive TCP slow-start yet small enough to finish in under three seconds on most broadband connections, so you see sustainable, real-world figures rather than marketing peaks.</p>
         </div>
       </section>
 
@@ -96,7 +102,7 @@
             </tbody>
           </table>
         </div>
-        <p><strong>Upload test</strong> is coming soon – we’ll POST the same 100 MB back to Cloudflare’s <code>__up</code> endpoint.</p>
+        <p><strong>Upload test</strong> is coming soon – we’ll POST the same 10 MB back to Cloudflare’s <code>__up</code> endpoint.</p>
       </section>
 
       <section id="factors">
