@@ -98,41 +98,44 @@
     const pingEl  = document.getElementById('ping');
     const ipispEl = document.getElementById('ipisp');
 
-    async function runTest() {
-      goBtn.disabled = true;
-      metaEl.textContent = 'Testing…';
-      resEl.style.display = 'none';
-      speedEl.innerHTML = '--<span class="unit">Mbps</span>';
+  async function runTest() {
+  goBtn.disabled = true;
+  metaEl.textContent = 'Testing…';
+  resEl.style.display = 'none';
+  speedEl.innerHTML = '--<span class="unit">Mbps</span>';
 
-      const start = performance.now();
-      const resp  = await fetch('https://speed.cloudflare.com/__down?bytes=10000000');
-      const reader= resp.body.getReader();
-      let bytes = 0;
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        bytes += value.length;
-      }
-      const sec   = (performance.now() - start) / 1000;
-      const mbps  = (bytes * 8) / (sec * 1e6);
+  /* ---------- download ----------
+     10 MB from Cloudflare edge (CORS-safe) */
+  const start = performance.now();
+  const resp  = await fetch('https://speed.cloudflare.com/__down?bytes=10000000');
+  const reader= resp.body.getReader();
+  let bytes = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    bytes += value.length;
+  }
+  const sec   = (performance.now() - start) / 1000;
+  const mbps  = (bytes * 8) / (sec * 1e6);
 
-      // latency ping
-      const t0    = performance.now();
-      await fetch('https://speed.cloudflare.com/__latency');
-      const ping  = (performance.now() - t0);
+  /* ---------- latency ----------
+     measure TTFB of a 1×1 gif (no-cors) */
+  const t0    = performance.now();
+  await fetch('https://speed.cloudflare.com/cdn-cgi/trace', { mode: 'no-cors' });
+  const ping  = (performance.now() - t0);
 
-      // IP + ISP
-      const ipInfo = await (await fetch('https://ipapi.co/json/')).json();
-      ipispEl.textContent = `${ipInfo.ip}  ${ipInfo.org || 'Unknown'}`;
+  /* ---------- IP + ISP ---------- */
+  const ipInfo = await (await fetch('https://ipapi.co/json/')).json();
+  ipispEl.textContent = `${ipInfo.ip}  ${ipInfo.org || 'Unknown'}`;
 
-      // UI
-      speedEl.innerHTML = `${mbps.toFixed(1)}<span class="unit">Mbps</span>`;
-      metaEl.textContent  = 'Done';
-      downEl.textContent  = mbps.toFixed(1);
-      pingEl.textContent  = ping.toFixed(0);
-      resEl.style.display = 'block';
-      goBtn.disabled = false;
-    }
+  /* ---------- display ---------- */
+  speedEl.innerHTML = `${mbps.toFixed(1)}<span class="unit">Mbps</span>`;
+  metaEl.textContent  = 'Done';
+  downEl.textContent  = mbps.toFixed(1);
+  pingEl.textContent  = ping.toFixed(0);
+  resEl.style.display = 'block';
+  goBtn.disabled = false;
+}
     goBtn.addEventListener('click', runTest);
   </script>
 </body>
