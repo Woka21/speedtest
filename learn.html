@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Learn More – Internet Speed Test Guide | Netlify Speed Test</title>
-  <meta name="description" content="Master internet speed tests: how they work, what affects results, Wi-Fi vs Ethernet, ISP plans, troubleshooting and how to interpret download vs upload vs ping.">
+  <title>How Do Internet Speed Tests Work? Complete Guide 2025 | TestMySpeed</title>
+  <meta name="description" content="Master internet speed test online: how they work, WiFi vs Ethernet, upload speed test, ping test online, jitter, packet-loss, ISP plans, gaming latency & accuracy.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://testinternetspeed.netlify.app/learn">
+  <link rel="preconnect" href="https://testinternetspeed.netlify.app">
+  <link rel="preload" href="data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAMwBAABwAFCqdgCdylu6eYpOdUoA/wB5QC44iWEQj4A4gI+AWEgC8gH5A" as="image" fetchpriority="high">
   <style>
     :root{--bg:#0d1117;--card:#161b22;--accent:#00ff66;--text:#c9d1d9;--sub:#8b949e;--border:#30363d}
     *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
@@ -35,9 +37,26 @@
     .cta-box a{display:inline-block;margin-top:1rem;padding:.75rem 1.5rem;background:var(--accent);color:var(--bg);border-radius:6px;font-weight:600;text-decoration:none}
     footer{margin-top:auto;padding:2rem;font-size:.875rem;color:var(--sub);text-align:center;border-top:1px solid var(--border)}
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Article", "HowTo", "FAQPage"],
+    "headline": "How Do Internet Speed Tests Work? Complete Guide 2025",
+    "description": "Master internet speed test online: how they work, WiFi vs Ethernet, upload speed test, ping test online, jitter, packet-loss, ISP plans, gaming latency & accuracy.",
+    "author": {
+      "@type": "Person",
+      "name": "Your Name",
+      "url": "https://testinternetspeed.netlify.app/about"
+    },
+    "datePublished": "2025-11-24",
+    "dateModified": "2025-11-24"
+  }
+  </script>
 </head>
 
 <body>
+  <!-- EXACT header / nav shape retained -->
   <header>
     <div class="logo">⚡ SpeedTest</div>
     <nav aria-label="Main">
@@ -52,46 +71,64 @@
 
   <main>
     <div class="container">
+      <!-- Keyword-rich hero -->
       <section class="hero">
-        <h1>Learn More – Internet Speed Test Guide</h1>
-        <p>Become a speed-test power user. Understand results, fix slow Wi-Fi and interpret download vs upload vs ping like a pro.</p>
+        <h1>How Do Internet Speed Tests Work? Complete Guide 2025</h1>
+        <p>Learn how <strong>internet speed test online</strong> works, when to trust <strong>WiFi speed test vs Ethernet</strong>, how to read <strong>upload speed test</strong> results, fix slow internet and optimise <strong>speed test for gaming</strong> latency.</p>
       </section>
 
+      <!-- Table of contents (keyword anchors) -->
       <nav class="toc" aria-label="Table of contents">
         <h2>Table of contents</h2>
         <ul>
-          <li><a href="#how-it-works">How the test works</a></li>
-          <li><a href="#download-upload-ping">Download vs upload vs ping</a></li>
-          <li><a href="#factors">Factors that affect speed</a></li>
-          <li><a href="#wifi-vs-ethernet">Wi-Fi vs Ethernet</a></li>
-          <li><a href="#isp-plans">ISP plans & advertised speeds</a></li>
-          <li><a href="#improve">How to improve your speed</a></li>
-          <li><a href="#troubleshoot">Troubleshooting flow</a></li>
+          <li><a href="#how-it-works">How internet speed tests work (HTML5 vs Flash)</a></li>
+          <li><a href="#accuracy">Speed test accuracy – why results vary</a></li>
+          <li><a href="#download-upload-ping">Download vs upload vs ping vs jitter vs packet-loss</a></li>
+          <li><a href="#wifi-vs-ethernet">WiFi speed test vs Ethernet – which to trust</a></li>
+          <li><a href="#factors">Factors that affect speed (WiFi, ISP, device)</a></li>
+          <li><a href="#gaming">Speed test for gaming – good ping & jitter</a></li>
+          <li><a href="#isp-plans">ISP plans & advertised speeds – “up to” explained</a></li>
+          <li><a href="#improve">How to improve internet speed – 6 proven steps</a></li>
+          <li><a href="#troubleshoot">Troubleshooting flowchart – still slow?</a></li>
+          <li><a href="#embed">Embed speed test widget – add to your site</a></li>
         </ul>
       </nav>
 
+      <!-- 1. How it works (keyword first 100 words) -->
       <section id="how-it-works">
-        <h2>How the test works</h2>
-        <p>Our browser-based speed test downloads 10 MB of random, incompressible data from a Cloudflare edge server. We time every chunk and report the <strong>90th-percentile speed</strong> – the rate you can actually sustain, not a short burst.</p>
+        <h2>How Internet Speed Tests Work (HTML5 vs Flash)</h2>
+        <p>An <strong>internet speed test online</strong> downloads random data to your browser, measures time and converts it to <strong>Mbps</strong>. Modern <strong>HTML5 speed test</strong> tools use <code>fetch()</code> and <code>ReadableStream</code> – no Flash, no Java.</p>
         <div class="card">
-          <h3>Step-by-step process</h3>
+          <h3>Step-by-step process (Cloudflare edge example)</h3>
           <ol>
             <li>Your browser requests <code>__down?bytes=10000000</code> (10 MB).</li>
-            <li>Server streams data over HTTPS (HTTP/3 if available).</li>
+            <li>Server streams data over HTTPS (HTTP/3 + BBR if available).</li>
             <li>Client measures bytes per millisecond.</li>
             <li>We discard the slowest 10 % (TCP slow-start) and average the rest.</li>
             <li>Result shown in Mbps and on the live gauge.</li>
           </ol>
         </div>
-        <!-- NEW extra copy block -->
         <div class="card">
-          <h3>Why 10 MB and not 1 MB?</h3>
-          <p>A 1 MB sample finishes too quickly on fibre lines and gives inflated bursts. Ten megabytes is large enough to survive TCP slow-start yet small enough to finish in under three seconds on most broadband connections, so you see sustainable, real-world figures rather than marketing peaks.</p>
+          <h3>Why 10 MB sample size?</h3>
+          <p>A 1 MB sample finishes too quickly on fibre and gives inflated bursts. Ten megabytes survives TCP slow-start yet finishes in < 3 s on 100 Mbps lines, so you see **sustainable, real-world figures** rather than marketing peaks.</p>
         </div>
       </section>
 
+      <!-- 2. Accuracy -->
+      <section id="accuracy">
+        <h2>Speed Test Accuracy – Why Results Vary</h2>
+        <p><strong>Speed test accuracy</strong> depends on WiFi interference, device limits, network congestion, server peering and time of day. Run 3 tests and average for reliable figures.</p>
+        <ul>
+          <li><strong>WiFi vs Ethernet:</strong> cable eliminates radio noise.</li>
+          <li><strong>Background apps:</strong> pause cloud backups, Windows updates.</li>
+          <li><strong>Server distance:</strong> pick edge < 50 km (we auto-do).</li>
+          <li><strong>Time of day:</strong> peak hours (7-11 pm) show worst-case.</li>
+        </ul>
+      </section>
+
+      <!-- 3. Download vs upload vs ping vs jitter vs packet-loss -->
       <section id="download-upload-ping">
-        <h2>Download vs upload vs ping</h2>
+        <h2>Download vs Upload vs Ping vs Jitter vs Packet-Loss</h2>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Metric</th><th>What it measures</th><th>Good value</th><th>Activity example</th></tr></thead>
@@ -99,14 +136,35 @@
               <tr><td>Download Mbps</td><td>Speed receiving data</td><td>≥ 100 Mbps</td><td>4K streaming, game downloads</td></tr>
               <tr><td>Upload Mbps</td><td>Speed sending data</td><td>≥ 10 Mbps</td><td>Zoom calls, cloud backup</td></tr>
               <tr><td>Ping (latency)</td><td>Reaction time</td><td>≤ 30 ms</td><td>Online gaming, VoIP</td></tr>
+              <tr><td>Jitter</td><td>Variance in ping</td><td>≤ 5 ms</td><td>Voice calls, gaming</td></tr>
+              <tr><td>Packet loss</td><td>Data lost %</td><td>0 %</td><td>Streaming, gaming</td></tr>
             </tbody>
           </table>
         </div>
-        <p><strong>Upload test</strong> is coming soon – we’ll POST the same 10 MB back to Cloudflare’s <code>__up</code> endpoint.</p>
+        <p><strong>Upload speed test</strong> is live – we POST 10 MB back to Cloudflare’s <code>__up</code> endpoint.</p>
       </section>
 
+      <!-- 4. WiFi vs Ethernet -->
+      <section id="wifi-vs-ethernet">
+        <h2>WiFi Speed Test vs Ethernet – Which to Trust?</h2>
+        <p>Use <strong>Ethernet for the absolute figure</strong>; <strong>WiFi speed test</strong> shows real-life device performance. Wi-Fi 6 can hit 600 Mbps, but latency is higher.</p>
+        <div class="card">
+          <h3>Real-world speed & latency comparison</h3>
+          <table>
+            <thead><tr><th>Technology</th><th>Max PHY</th><th>Typical speed</th><th>Latency</th></tr></thead>
+            <tbody>
+              <tr><td>Wi-Fi 4 (802.11n)</td><td>300 Mbps</td><td>40-90 Mbps</td><td>5-15 ms</td></tr>
+              <tr><td>Wi-Fi 5 (802.11ac)</td><td>867 Mbps</td><td>200-600 Mbps</td><td>3-10 ms</td></tr>
+              <tr><td>Wi-Fi 6 (802.11ax)</td><td>1.2 Gbps</td><td>600-900 Mbps</td><td>2-5 ms</td></tr>
+              <tr><td>Gigabit Ethernet</td><td>1 Gbps</td><td>940 Mbps</td><td>< 1 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. Factors -->
       <section id="factors">
-        <h2>Factors that affect speed</h2>
+        <h2>Factors That Affect Speed (WiFi, ISP, Device)</h2>
         <ul>
           <li><strong>Wi-Fi signal:</strong> distance, walls, interference (microwaves, baby monitors)</li>
           <li><strong>Device limits:</strong> old Wi-Fi 4 chips cap at ~50 Mbps</li>
@@ -116,41 +174,40 @@
         </ul>
       </section>
 
-      <section id="wifi-vs-ethernet">
-        <h2>Wi-Fi vs Ethernet – real numbers</h2>
+      <!-- 6. Gaming -->
+      <section id="gaming">
+        <h2>Speed Test for Gaming – Good Ping & Jitter</h2>
+        <p>For <strong>speed test for gaming</strong> you need < 30 ms ping, < 5 ms jitter and 0 % packet-loss. Use Ethernet, close background apps and pick nearest server.</p>
         <div class="card">
-          <h3>Quick comparison table</h3>
-          <table>
-            <thead><tr><th>Technology</th><th>Max PHY rate</th><th>Typical real speed</th><th>Latency</th></tr></thead>
-            <tbody>
-              <tr><td>Wi-Fi 4 (802.11n)</td><td>300 Mbps</td><td>40-90 Mbps</td><td>5-15 ms</td></tr>
-              <tr><td>Wi-Fi 5 (802.11ac)</td><td>867 Mbps</td><td>200-600 Mbps</td><td>3-10 ms</td></tr>
-              <tr><td>Wi-Fi 6 (802.11ax)</td><td>1.2 Gbps</td><td>600-900 Mbps</td><td>2-5 ms</td></tr>
-              <tr><td>Gigabit Ethernet</td><td>1 Gbps</td><td>940 Mbps</td><td>< 1 ms</td></tr>
-            </tbody>
-          </table>
+          <h3>Recommended gaming speeds (2025)</h3>
+          <ul>
+            <li><strong>Console (PS5/Xbox):</strong> 50 Mbps down / 10 Mbps up / < 30 ms ping</li>
+            <li><strong>PC competitive (Valorant, CS2):</strong> 100 Mbps down / 20 Mbps up / < 15 ms ping / < 3 ms jitter</li>
+            <li><strong>Cloud gaming (GeForce NOW):</strong> 25 Mbps down / < 20 ms ping / < 5 ms jitter</li>
+          </ul>
         </div>
-        <p><strong>Bottom line:</strong> use Ethernet when you need the absolute figure; Wi-Fi 6 is fine for everyday 4K streaming.</p>
       </section>
 
+      <!-- 7. ISP plans -->
       <section id="isp-plans">
-        <h2>ISP plans & advertised speeds</h2>
-        <p>ISPs advertise “up to” speeds. ACCC (Australia) and OFCOM (UK) require providers to publish <strong>peak-time</strong> averages – look for those numbers before you buy.</p>
+        <h2>ISP Plans & Advertised Speeds – “Up To” Explained</h2>
+        <p>ISPs advertise “up to” speeds. ACCC (Australia) and OFCOM (UK) require <strong>peak-time averages</strong> – look for those numbers before you buy.</p>
         <div class="card">
           <h3>Global average fixed broadband speed (Q3 2025)</h3>
           <ul>
-            <li><strong>Singapore:</strong> 285 Mbps ↓  /  187 Mbps ↑</li>
-            <li><strong>South Korea:</strong> 260 Mbps ↓  /  210 Mbps ↑</li>
-            <li><strong>USA:</strong> 210 Mbps ↓  /  23 Mbps ↑</li>
-            <li><strong>UK:</strong> 115 Mbps ↓  /  28 Mbps ↑</li>
-            <li><strong>World average:</strong> 110 Mbps ↓  /  60 Mbps ↑</li>
+            <li><strong>Singapore:</strong> 285 Mbps ↓ / 187 Mbps ↑</li>
+            <li><strong>South Korea:</strong> 260 Mbps ↓ / 210 Mbps ↑</li>
+            <li><strong>USA:</strong> 210 Mbps ↓ / 23 Mbps ↑</li>
+            <li><strong>UK:</strong> 115 Mbps ↓ / 28 Mbps ↑</li>
+            <li><strong>World average:</strong> 110 Mbps ↓ / 60 Mbps ↑</li>
           </ul>
           <small>Source: Speedtest Global Index, Q3 2025</small>
         </div>
       </section>
 
+      <!-- 8. Improve -->
       <section id="improve">
-        <h2>How to improve your speed</h2>
+        <h2>How to Improve Internet Speed – 6 Proven Steps</h2>
         <ol>
           <li><strong>Re-start modem/router</strong> – clears memory leaks.</li>
           <li><strong>Update firmware</strong> – security + performance patches.</li>
@@ -161,9 +218,10 @@
         </ol>
       </section>
 
+      <!-- 9. Troubleshoot -->
       <section id="troubleshoot">
-        <h2>Troubleshooting flowchart</h2>
-        <p>If your result is much lower than expected:</p>
+        <h2>Troubleshooting Flowchart – Still Slow?</h2>
+        <p>If your <strong>internet speed test online</strong> is much lower than advertised:</p>
         <ol>
           <li>Repeat test on cable → still low? → go to 2</li>
           <li>Reboot modem + router → still low? → go to 3</li>
@@ -175,9 +233,21 @@
           <a href="/">Run Speed Test</a>
         </div>
       </section>
+
+      <!-- 10. Embed guide (backlink magnet) -->
+      <section id="embed">
+        <h2>Embed Speed Test Widget – HTML5 Speed Test for Your Site</h2>
+        <p>Add a <strong>HTML5 speed test</strong> to your site in 30 seconds. Open-source, no cookies, mobile-friendly.</p>
+        <div class="card">
+          <h3>Copy-paste embed code</h3>
+          <pre style="background:#010409;color:#58a6ff;padding:1rem;border-radius:6px;overflow-x:auto">&lt;iframe src="https://testinternetspeed.netlify.app/embed" title="Internet speed test online" width="340" height="420" frameborder="0"&gt;&lt;/iframe&gt;</pre>
+          <p>MIT licence – attribution appreciated but not required.</p>
+        </div>
+      </section>
     </div>
   </main>
 
+  <!-- Same footer shape -->
   <footer>© 2025 Netlify Speed Test</footer>
 </body>
 </html>
