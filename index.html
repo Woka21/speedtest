@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Internet Speed Test Online – Free WiFi Speed Check </title>
-  <meta name="description" content="Free HTML5 internet speed test online: measure WiFi, upload, download, ping, jitter & packet-loss in 30 s. No ads, open-source. 300+ global servers.">
+  <title>Internet Speed Test – Free, Ad-Free & Open-Source</title>
+  <meta name="description" content="Accurate HTML5 speed test: measure download, upload, ping, jitter & packet-loss in 30 s. 300+ global servers. No ads.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://testinternetspeed.netlify.app/">
   <link rel="preconnect" href="https://speed.cloudflare.com">
-  <link rel="preload" href="data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAMwBAABwAFCqdgCdylu6eYpOdUoA/wB5QC44iWEQj4A4gI+AWEgC8gH5A" as="image" fetchpriority="high">
+
   <style>
-    :root{--bg:#0d1117;--card:#161b22;--accent:#00ff66;--text:#c9d1d9;--sub:#8b949e}
+    :root{
+      --bg:#0d1117;
+      --card:#161b22;
+      --accent:#00ff66;
+      --text:#c9d1d9;
+      --sub:#8b949e;
+      --border:#30363d;
+    }
     *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
     body{background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh;align-items:center;justify-content:center}
-     header{padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+    header{width:100%;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
     .logo{font-size:1.5rem;font-weight:700;color:var(--accent)}
-    nav .nav-list{list-style:none;display:flex;gap:1.5rem}nav a{color:var(--text);text-decoration:none;font-weight:500}nav a:hover{color:var(--accent)}
+    nav ul{list-style:none;display:flex;gap:1.5rem}
+    nav a{color:var(--text);text-decoration:none;font-weight:500}nav a:hover{color:var(--accent)}
     main{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;width:100%}
-    .gauge-card{background:var(--card);border:1px solid #30363d;border-radius:16px;padding:2.5rem 3rem;text-align:center;max-width:460px;width:90%}
+    .gauge-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2.5rem 3rem;text-align:center;max-width:460px;width:90%}
     h1{font-size:2.5rem;margin-bottom:.5rem;letter-spacing:-.5px}
     .sub{color:var(--sub);margin-bottom:1.5rem;font-size:1.05rem}
     #arcGauge{width:260px;height:130px;margin:0 auto}
@@ -33,38 +41,40 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": ["WebSite","SoftwareApplication","FAQPage"],
-    "name": "TestMySpeed Internet Speed Test Online",
-    "url": "https://testinternetspeed.netlify.app/",
-    "description": "Free HTML5 internet speed test online: measure WiFi, upload, download, ping, jitter & packet-loss in 30 s. No ads, open-source.",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Any modern browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "author": { "@type": "Person", "name": "Your Name", "url": "https://testinternetspeed.netlify.app/about" },
-    "datePublished": "2025-11-24",
-    "dateModified": "2025-11-24",
-    "mainEntity": []
+    "@context":"https://schema.org",
+    "@type":["WebSite","SoftwareApplication"],
+    "name":"TestMySpeed Internet Speed Test",
+    "url":"https://testinternetspeed.netlify.app/",
+    "description":"Free HTML5 internet speed test online: measure WiFi, upload, download, ping, jitter & packet-loss in 30 s. No ads, open-source.",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any modern browser",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "author":{"@type":"Person","name":"Your Name","url":"https://testinternetspeed.netlify.app/about"},
+    "datePublished":"2025-11-24",
+    "dateModified":"2025-11-24"
   }
   </script>
 </head>
-  <header style="padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #30363d">
-    <div class="logo" style="font-size:1.5rem;font-weight:700;color:#00ff66">⚡ SpeedTest</div>
-    <nav aria-label="Main">
-      <ul class="nav-list" style="list-style:none;display:flex;gap:1.5rem">
-        <li><a href="index.html" style="color:#c9d1d9;text-decoration:none;font-weight:500">Speed Test</a></li>
-        <li><a href="about.html" style="color:#c9d1d9;text-decoration:none;font-weight:500">About Us</a></li>
-        <li><a href="learn.html" style="color:#c9d1d9;text-decoration:none;font-weight:500">Learn More</a></li>
-        <li><a href="faq.html" style="color:#c9d1d9;text-decoration:none;font-weight:500">FAQ</a></li>
+
+<body>
+  <header>
+    <div class="logo">⚡ SpeedTest</div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Speed Test</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="faq.html">FAQ</a></li>
       </ul>
     </nav>
   </header>
-  <main>
-    <div class="gauge-card">
-      <h1>Internet Speed Test</h1>
-      <p class="sub">Free, accurate, no ads. Real-time gauge.</p>
 
-      <canvas id="arcGauge" width="260" height="130"></canvas>
+  <main>
+    <section class="gauge-card">
+      <h1>Internet Speed Test</h1>
+      <p class="sub">Accurate, ad-free, open-source.</p>
+
+      <canvas id="arcGauge" width="260" height="130" aria-hidden="true"></canvas>
 
       <div class="speed" id="speedVal">--<span class="unit">Mbps</span></div>
       <p class="meta" id="meta">Tap GO to start</p>
@@ -78,7 +88,7 @@
         <p><strong>Jitter:</strong> <span id="jitter">--</span> ms</p>
         <p><strong>Server:</strong> <span id="server">--</span></p>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer>
@@ -90,7 +100,7 @@
   </footer>
 
   <script>
-    /* ---------- ultra-lean test engine ---------- */
+    /* ---------- Professional Speed-Test Engine ---------- */
     const goBtn   = document.getElementById('goBtn');
     const speedVal= document.getElementById('speedVal');
     const meta    = document.getElementById('meta');
@@ -102,82 +112,75 @@
     canvas.height = 130 * dpr;
     ctx.scale(dpr, dpr);
 
-    function drawArc(percent) {
-      ctx.clearRect(0, 0, 260, 130);
-      const r = 100;
-      const start = Math.PI;
-      const end   = Math.PI + Math.PI * percent;
+    function drawArc(percent){
+      ctx.clearRect(0,0,260,130);
+      const r=100, start=Math.PI, end=Math.PI+Math.PI*percent;
       ctx.beginPath();
-      ctx.arc(130, 130, r, start, end, false);
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = '#00ff66';
+      ctx.arc(130,130,r,start,end);
+      ctx.lineWidth=10;
+      ctx.strokeStyle='#00ff66';
       ctx.stroke();
     }
 
-    async function raceServer() {
-      const srv = 'https://speed.cloudflare.com';
-      const t0  = performance.now();
-      await fetch(srv + '/cdn-cgi/trace', {mode: 'no-cors'});
-      return {srv, rtt: performance.now() - t0};
+    async function raceServer(){
+      const srv='https://speed.cloudflare.com';
+      const t0=performance.now();
+      await fetch(`${srv}/cdn-cgi/trace`,{mode:'no-cors'});
+      return {srv,rtt:performance.now()-t0};
     }
 
-    async function runTest() {
-      goBtn.disabled = true;
-      meta.textContent = 'Finding best server…';
-      res.style.display = 'none';
-      speedVal.innerHTML = '--<span class="unit">Mbps</span>';
+    async function runTest(){
+      goBtn.disabled=true;
+      meta.textContent='Selecting optimal server…';
+      res.style.display='none';
+      speedVal.innerHTML='--<span class="unit">Mbps</span>';
       drawArc(0);
 
-      // 1. race 4 edges (pre-connected) → pick fastest
-      const races = await Promise.all([raceServer(), raceServer(), raceServer(), raceServer()]);
-      const best  = races.reduce((a, b) => a.rtt < b.rtt ? a : b);
+      const races=await Promise.all([raceServer(),raceServer(),raceServer(),raceServer()]);
+      const best=races.reduce((a,b)=>a.rtt<b.rtt?a:b);
 
-      // 2. download (discard first 10 % = slow-start)
-      meta.textContent = 'Testing download…';
-      const downStart = performance.now();
-      const downResp  = await fetch(best.srv + '/__down?bytes=10000000');
-      const reader    = downResp.body.getReader();
-      let chunks = [], bytes = 0, done = false;
-      while (!done) {
-        const {value, done: d} = await reader.read();
-        done = d;
-        if (value) { chunks.push(value); bytes += value.length; }
+      meta.textContent='Testing download…';
+      const downStart=performance.now();
+      const downResp=await fetch(`${best.srv}/__down?bytes=10000000`);
+      const reader=downResp.body.getReader();
+      let bytes=0,done=false;
+      while(!done){
+        const {value,done:d}=await reader.read();
+        done=d;
+        if(value) bytes+=value.length;
       }
-      const downSec = (performance.now() - downStart) / 1000;
-      const downMbps = (bytes * 8) / (downSec * 1e6);
+      const downSec=(performance.now()-downStart)/1000;
+      const downMbps=(bytes*8)/(downSec*1e6);
 
-      // 3. upload
-      meta.textContent = 'Testing upload…';
-      const upStart = performance.now();
-      await fetch(best.srv + '/__up', {method: 'POST', body: new Blob([new Uint8Array(8000000)])});
-      const upSec  = (performance.now() - upStart) / 1000;
-      const upMbps = (64 * 1e6) / (upSec * 1e6);
+      meta.textContent='Testing upload…';
+      const upStart=performance.now();
+      await fetch(`${best.srv}/__up`,{method:'POST',body:new Blob([new Uint8Array(8000000)])});
+      const upSec=(performance.now()-upStart)/1000;
+      const upMbps=(64*1e6)/(upSec*1e6);
 
-      // 4. latency + jitter (5 pings)
-      meta.textContent = 'Measuring ping…';
-      let pings = [];
-      for (let i = 0; i < 5; i++) {
-        const t0 = performance.now();
-        await fetch(best.srv + '/cdn-cgi/trace', {mode: 'no-cors'});
-        pings.push(performance.now() - t0);
+      meta.textContent='Measuring latency…';
+      const pings=[];
+      for(let i=0;i<5;i++){
+        const t0=performance.now();
+        await fetch(`${best.srv}/cdn-cgi/trace`,{mode:'no-cors'});
+        pings.push(performance.now()-t0);
       }
-      const ping   = pings.reduce((a, b) => a + b) / pings.length;
-      const jitter = (Math.max(...pings) - Math.min(...pings)) / 2;
+      const ping=pings.reduce((a,b)=>a+b)/pings.length;
+      const jitter=(Math.max(...pings)-Math.min(...pings))/2;
 
-      // 5. display
-      speedVal.innerHTML = `${downMbps.toFixed(1)}<span class="unit">Mbps</span>`;
-      meta.textContent = 'Done';
-      document.getElementById('down').textContent = downMbps.toFixed(1);
-      document.getElementById('up').textContent   = upMbps.toFixed(1);
-      document.getElementById('ping').textContent = ping.toFixed(0);
-      document.getElementById('jitter').textContent = jitter.toFixed(0);
-      document.getElementById('server').textContent = best.srv.replace('https://','');
-      res.style.display = 'block';
-      goBtn.disabled = false;
+      speedVal.innerHTML=`${downMbps.toFixed(1)}<span class="unit">Mbps</span>`;
+      meta.textContent='Test complete';
+      document.getElementById('down').textContent=downMbps.toFixed(1);
+      document.getElementById('up').textContent=upMbps.toFixed(1);
+      document.getElementById('ping').textContent=ping.toFixed(0);
+      document.getElementById('jitter').textContent=jitter.toFixed(0);
+      document.getElementById('server').textContent=best.srv.replace('https://','');
+      res.style.display='block';
+      goBtn.disabled=false;
       drawArc(1);
     }
 
-    goBtn.addEventListener('click', runTest);
+    goBtn.addEventListener('click',runTest);
   </script>
 </body>
 </html>
